@@ -3,10 +3,13 @@ import streamlit as st
 import PyPDF2
 import os
 
-# Use your real key locally or env var
-client = OpenAI(api_key="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")
-# Load ALL PDFs from Training Files folder
-training_folder = "/Users/timbillekulendi/M AI Project/Training Files"
+# On Streamlit Cloud, this reads from app secrets
+# Define OPENAI_API_KEY in Streamlit → Settings → Secrets
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+# Use relative path so it works on Streamlit
+training_folder = "Training Files"
+
 all_content = ""
 
 for filename in os.listdir(training_folder):
